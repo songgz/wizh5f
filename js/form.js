@@ -87,30 +87,29 @@ WizH5F.Validator = new Class({
     },
     test: function(input) {
         if (input.get('required')) {
-            if (this.validators['required'](input)) {
-                input.addClass('validclass')
-            } else {
-                input.addClass('invalidclass');
+            if (!this.validators['required'](input)) {
+                return false;
             }
         }
         if (input.get("pattern")) {
-            if (this.validators['pattern'](input)) {
-                input.addClass('validclass')
-            } else {
-                input.addClass('invalidclass');
+            if (!this.validators['pattern'](input)) {
+                return false;
             }
         }
         if (input.getAttribute('type')) {
-            if (this.validators[input.getAttribute('type')]) {
-                input.addClass('validclass')
-            } else {
-                input.addClass('invalidclass');
+            if (!this.validators[input.getAttribute('type')]) {
+                return false;
             }
         }
+        return true;
     },
     addValidator: function(input) {
         input.addEvent('blur', function() {
-            this.test(input);
+            if(this.test(input)){
+                input.addClass('validclass');
+            }else{
+                input.addClass('invalidclass');
+            }
         }.bind(this));
     },
     add: function(rule, fn) {
