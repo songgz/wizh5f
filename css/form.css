@@ -1,11 +1,23 @@
- .invalidclass {
-        background-image: url(ico_validation.png);
-        background-position: right top;
-        background-repeat: no-repeat;
-    }
+/*.invalidclass {*/
+    /*background-image: url(ico_validation.png);*/
+    /*background-position: right top;*/
+    /*background-repeat: no-repeat;*/
+/*}*/
 
-    .validclass {
-        background-image: url(ico_validation.png);
-        background-position: right bottom;
-        background-repeat: no-repeat;
-    }
+/*.validclass {*/
+    /*background-image: url(ico_validation.png);*/
+    /*background-position: right bottom;*/
+    /*background-repeat: no-repeat;*/
+/*}*/
+
+input:required:invalid, input:focus:invalid {
+    background-image: url(../images/ico_validation.png);
+    background-position: right top;
+    background-repeat: no-repeat;
+}
+
+input:required:valid {
+    background-image: url(../images/ico_validation.png);
+    background-position: right bottom;
+    background-repeat: no-repeat;
+}
