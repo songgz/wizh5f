@@ -170,14 +170,9 @@ WizH5F.Form = new Class({
                 if (!WizH5F.Support.hasAttributeSupport('placeholder')) {
                     this.placeholder.addPlaceholder(input);
                 }
-                //alert(Html5.Support.hasAttributeSupport('validity'));
-//                        alert(input.getAttribute('type') +'='+ Html5.Support.hasTypeSupport(input.getAttribute('type')));
-//                        if (!Html5.Support.hasValidateSupport){
-//                            alert("不支持验证")
                 if (!WizH5F.Support.hasAttributeSupport('validity')) {
                     this.validator.addValidator(input);
                 }
-//                        }
             }, this);
         }.bind(this));
     }
