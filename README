@@ -1,0 +1,8 @@
+== Welcome to Wizh5f
+
+HTML5 has a built-in validation that doesn't require any JavaScript.
+However, currently, it only works in Webkit browsers and can't be used in Firefox, Opera or IE.
+
+Wizh5f is mootools plugin that adds the lacking HTML5 form validation features to non-compatible browsers.
+
+It doesn't require any custom functions or coding. Just create your form with the HTML5 syntax and it'll execute them automatically.
