@@ -12,6 +12,11 @@
 
 input:required:invalid, input:focus:invalid {
     background-image: url(../images/ico_validation.png);
+    background-position: right center;
+    background-repeat: no-repeat;
+}
+input:invalid, input:focus:invalid {
+    background-image: url(../images/ico_validation.png);
     background-position: right top;
     background-repeat: no-repeat;
 }
