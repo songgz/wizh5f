@@ -5,6 +5,10 @@ WizH5F.Validator = new Class({
             required: function(input) {
                 return input.get('value').length > 0
             },
+            text:function(input){
+//                暂时这么写
+                return input.get('value').length > 0
+            },
             search:function(input) {
                 return input.get('value').test();
             },
@@ -92,9 +96,9 @@ WizH5F.Validator = new Class({
     },
     addValidator: function(input) {
         input.addEvent('blur', function() {
-          input.set('class','');
+             input.set('class','');
             if (this.test(input)) {
-                input.addClass('class','valid');
+                input.addClass('valid');
             } else {
                 input.addClass('invalid');
             }
