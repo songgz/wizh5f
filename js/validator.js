@@ -49,6 +49,7 @@ WizH5F.Validator = new Class({
             },
 
             tel:function(input) {
+                alert('sfsfs');
                 return input.get('value').test(/^((\d{3,4}-)?\d{7,8})|(13[0-9]{9})$/);
             },
             pattern: function(input) {
@@ -62,6 +63,7 @@ WizH5F.Validator = new Class({
     },
     initialize: function(options) {
         this.setOptions(options);
+//        alert(input.get('required'));
     },
     test: function(input) {
         if (input.get('required')) {
@@ -81,12 +83,20 @@ WizH5F.Validator = new Class({
         }
         return true;
     },
+    initinput:function(input){
+        if(input.get('required') == null ){
+              input.set('class','valid');
+        } else{
+            input.set('class','initvalid');
+        }
+    },
     addValidator: function(input) {
         input.addEvent('blur', function() {
+          input.set('class','');
             if (this.test(input)) {
-                input.addClass('validclass');
+                input.addClass('class','valid');
             } else {
-                input.addClass('invalidclass');
+                input.addClass('invalid');
             }
         }.bind(this));
     },

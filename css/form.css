@@ -9,6 +9,9 @@
     /*background-position: right bottom;*/
     /*background-repeat: no-repeat;*/
 /*}*/
+/*.requiredclass{*/
+    /**/
+/*}*/
 
 input:required:invalid, input:focus:invalid {
     background-image: url(../images/ico_validation.png);
@@ -26,3 +29,27 @@ input:required:valid {
     background-position: right bottom;
     background-repeat: no-repeat;
 }
+
+input:valid {
+    background-image: url(../images/ico_validation.png);
+    background-position: right bottom;
+    background-repeat: no-repeat;
+}
+.valid {
+    background-image: url(../images/ico_validation.png);
+    background-position: right bottom;
+    background-repeat: no-repeat;
+}
+.initvalid{
+   background-image: url(../images/ico_validation.png);
+    background-position: right center;
+    background-repeat: no-repeat;
+}
+.invalid{
+     background-image: url(../images/ico_validation.png);
+    background-position: right top;
+    background-repeat: no-repeat;
+
+}
+
+

@@ -36,21 +36,21 @@
                 <input type="email" id="email" name="email" placeholder="e.g.ryan@example.net"
                        title="Please enter a valid email" required="required"/>
 
-                <p class="validation01">
-                    <span class="invalid">Please enter a valid email address e.g. ryan@example.com</span>
-                    <span class="valid">Thank you for entering a valid email</span>
-                </p>
+                <!--<p class="validation01">-->
+                    <!--<span class="invalid">Please enter a valid email address e.g. ryan@example.com</span>-->
+                    <!--<span class="valid">Thank you for entering a valid email</span>-->
+                <!--</p>-->
 
             </li>
             <li>
                 <label for="tel">Phone *</label>
                 <input type="tel" id="tel" name="tel" pattern="\d{10}"
-                       placeholder="Please enter a ten digit phone number" />
+                       placeholder="a ten digit phone number" />
 
-                <p class="validation01">
-                    <span class="invalid">No spaces or brackets e.g. 0390001234</span>
-                    <span class="valid">That's what we wanted!</span>
-                </p>
+                <!--<p class="validation01">-->
+                    <!--<span class="invalid">No spaces or brackets e.g. 0390001234</span>-->
+                    <!--<span class="valid">That's what we wanted!</span>-->
+                <!--</p>-->
 
             </li>
         </ol>
@@ -66,17 +66,17 @@
             </li>
             <li>
                 <label for="suburb">Suburb *</label>
-                <input id="suburb" name="suburb" type="text" required/>
+                <input id="suburb" name="suburb" type="text" required="required"/>
             </li>
             <li>
                 <label for="postcode">Post code *</label>
 
                 <input id="postcode" name="postcode" type="number" required="required "/>
 
-                <p class="validation01">
-                    <span class="invalid">Your postcode is out of range between 1001 - 8000</span>
-                    <span class="valid">Thank you your postcode is in the correct range</span>
-                </p>
+                <!--<p class="validation01">-->
+                    <!--<span class="invalid">Your postcode is out of range between 1001 - 8000</span>-->
+                    <!--<span class="valid">Thank you your postcode is in the correct range</span>-->
+                <!--</p>-->
             </li>
             <li>
                 <label for="state">State</label>
@@ -102,24 +102,24 @@
             <li>
                 <label for="username">Username *</label>
                 <input id="username" name="username" type="text" pattern="\w{4,}"
-                       placeholder="Atleast 4 alphanumeric characters" required/>
+                       placeholder="Atleast 4 alpha" required="required"/>
             </li>
             <li>
 
                 <label for="password">Password *</label>
                 <input id="password" name="password" type="password"
                        title="Minimum 8 characters, one number, one uppercase and one lowercase letter"
-                       pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*" required/>
+                       pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*" required="required"/>
 
-                <p class="validation01">
-                    <span class="invalid">Minimum 8 characters, one number, one uppercase letter and one lowercase letter</span>
-                    <span class="valid">Your password meets our requirements, thank you.</span>
-                </p>
+                <!--<p class="validation01">-->
+                    <!--<span class="invalid">Minimum 8 characters, one number, one uppercase letter and one lowercase letter</span>-->
+                    <!--<span class="valid">Your password meets our requirements, thank you.</span>-->
+                <!--</p>-->
             </li>
             <li>
 
                 <label for="url">Website *</label>
-                <input type="url" name="url" id="url" required/>
+                <input type="url" name="url" id="url" required="required"/>
             </li>
         </ol>
     </fieldset>
