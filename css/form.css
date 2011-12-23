@@ -1,24 +1,9 @@
-/*.invalidclass {*/
-    /*background-image: url(ico_validation.png);*/
-    /*background-position: right top;*/
-    /*background-repeat: no-repeat;*/
-/*}*/
-
-/*.validclass {*/
-    /*background-image: url(ico_validation.png);*/
-    /*background-position: right bottom;*/
-    /*background-repeat: no-repeat;*/
-/*}*/
-/*.requiredclass{*/
-    /**/
-/*}*/
-
-input:required:invalid, input:focus:invalid {
+input:required:invalid, input:focus:invalid,.initvalid {
     background-image: url(../images/ico_validation.png);
     background-position: right center;
     background-repeat: no-repeat;
 }
-input:invalid, input:focus:invalid {
+input:invalid, input:focus:invalid,.invalid {
     background-image: url(../images/ico_validation.png);
     background-position: right top;
     background-repeat: no-repeat;
@@ -30,26 +15,9 @@ input:required:valid {
     background-repeat: no-repeat;
 }
 
-input:valid {
+input:valid,.valid {
     background-image: url(../images/ico_validation.png);
     background-position: right bottom;
     background-repeat: no-repeat;
 }
-.valid {
-    background-image: url(../images/ico_validation.png);
-    background-position: right bottom;
-    background-repeat: no-repeat;
-}
-.initvalid{
-   background-image: url(../images/ico_validation.png);
-    background-position: right center;
-    background-repeat: no-repeat;
-}
-.invalid{
-     background-image: url(../images/ico_validation.png);
-    background-position: right top;
-    background-repeat: no-repeat;
-
-}
-
 
