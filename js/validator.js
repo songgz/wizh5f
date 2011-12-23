@@ -7,7 +7,7 @@ WizH5F.Validator = new Class({
             },
             text:function(input){
 //                暂时这么写
-                return input.get('value').length > 0
+                return true
             },
             search:function(input) {
                 return input.get('value').test();
