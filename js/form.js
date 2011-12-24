@@ -15,7 +15,7 @@ WizH5F.Form = new Class({
                     this.placeholder.addPlaceholder(input);
                 }
                 if (!WizH5F.Support.hasAttributeSupport('validity')) {
-                    this.validator.initinput(input);
+                    this.validator.valid(input);
                     this.validator.addValidator(input);
                 }
             }, this);

@@ -5,7 +5,7 @@ WizH5F.Validator = new Class({
             required: function(input) {
                 return input.get('value').length > 0
             },
-            text:function(input){
+            text:function(input) {
 //                暂时这么写
                 return true
             },
@@ -87,21 +87,20 @@ WizH5F.Validator = new Class({
         }
         return true;
     },
-    initinput:function(input){
-        if(input.get('required') == null ){
-              input.set('class','valid');
-        } else{
-            input.set('class','initvalid');
-        }
-    },
-    addValidator: function(input) {
-        input.addEvent('blur', function() {
-             input.set('class','');
+    valid: function(input) {
+        if (input.get('value') !== input.get('placeholder')) {
             if (this.test(input)) {
                 input.addClass('valid');
             } else {
                 input.addClass('invalid');
             }
+        } else {
+            input.addClass('required_invalid');
+        }
+    },
+    addValidator: function(input) {
+        input.addEvent('blur', function() {
+            this.valid(input);
         }.bind(this));
     },
     add: function(rule, fn) {
