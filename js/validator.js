@@ -21,6 +21,9 @@ WizH5F.Validator = new Class({
                 return input.get('value').test()
             },
             date:function(input) {
+                var tempdate = input.get('value').test(/^(\d{1,4})(-|\/)(\d{1,2})\2(\d{1,2})$/);
+                if(tempdate==null){return false;}
+//                if()
                 return input.get('value').test()
             },
             month:function(input) {
@@ -30,13 +33,15 @@ WizH5F.Validator = new Class({
                 return input.get('value').test()
             },
             time:function(input) {
-                return input.get('value').test();
+                 // hh:mm:ss  第一个正则验证的是24小时制 第二个验证是12小时制
+                return ((input.get('value').test(/^(2[0-3]|[01]?[0-9]):([0-5]?[0-9]):([0-5]?[0-9])$/)) ||
+                    (input.get('value').test(/^(1[0-2]|0?[1-9]):([0-5]?[0-9]):([0-5]?[0-9])$/)));
             },
             'datetime-local':function(input) {
                 return input.get('value').test();
             },
-            number:function(input) {
-                return input.get('value').test(/^\d+$/);
+            'number':function(input) {
+                return input.get('value').test(/^[0-9]*$/);
             },
             range:function(input) {
                 return input.get('value').test();
@@ -52,8 +57,8 @@ WizH5F.Validator = new Class({
             },
 
             tel:function(input) {
-                alert('sfsfs');
-                return input.get('value').test(/^((\d{3,4}-)?\d{7,8})|(13[0-9]{9})$/);
+//                  此类型要求输入一个电话号码，但实际上它并没有特殊的验证，与text类型没什么区别。
+                return true;
             },
             pattern: function(input) {
                 return input.get('value').match(/input.get('pattern')/)
@@ -71,6 +76,7 @@ WizH5F.Validator = new Class({
     test: function(input) {
         if (input.get('required')) {
             if (!this.options.validators['required'](input)) {
+
                 return false;
             }
         }
@@ -79,8 +85,8 @@ WizH5F.Validator = new Class({
                 return false;
             }
         }
-        if (input.getAttribute('type')) {
-            if (!this.options.validators[input.getAttribute('type')]) {
+        if (input.getAttribute('type') !== 'text') {
+            if (!this.options.validators[input.getAttribute('type')](input)) {
                 return false;
             }
         }
@@ -89,14 +95,14 @@ WizH5F.Validator = new Class({
     valid: function(input) {
         if (input.get('required')) {
             if (input.get('value') == "" || input.get('value') == input.get('placeholder')) {
-                input.addClass('required_invalid');
+                input.set('class','required_invalid');
                 return;
             }
         }
         if (this.test(input)) {
-            input.addClass('valid');
+            input.set('class','valid');
         } else {
-            input.addClass('invalid');
+            input.set('class','invalid');
         }
     },
     addValidator: function(input) {

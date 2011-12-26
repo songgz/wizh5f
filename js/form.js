@@ -1,4 +1,3 @@
-
 WizH5F.Form = new Class({
     Implements: [Options],
     options: {
@@ -11,12 +10,19 @@ WizH5F.Form = new Class({
         this.forms = $$(this.options.forms);
         this.forms.each(function(form) {
             form.getElements("input").each(function(input) {
-                if (!WizH5F.Support.hasAttributeSupport('placeholder')) {
-                    this.placeholder.addPlaceholder(input);
-                }
-                if (!WizH5F.Support.hasAttributeSupport('validity')) {
+                ///if (!WizH5F.Support.hasTypeSupport(input.getAttribute('type')) ) {
+//                    if (!WizH5F.Support.hasAttributeSupport('placeholder')) {
+//                        this.placeholder.addPlaceholder(input);
+//                    }
+                    //if (!WizH5F.Support.hasAttributeSupport('validity')) {
                     this.validator.addValidator(input);
-                }
+                    //}
+
+                //}
+
+//                alert(!WizH5F.Support.hasAttributeSupport('validity'));
+
+
             }, this);
         }.bind(this));
     }
