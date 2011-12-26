@@ -21,14 +21,15 @@ WizH5F.Validator = new Class({
                 return input.get('value').test()
             },
             date:function(input) {
-//                input.get('value').test(/^([0-9]{4})(-)?(1[0-2]|0[1-9])(?(2)-)(3[0-1]|0[1-9])$/)
-                return input.get('value').test()
+                // YYYYMMDD 短日期格式
+                return input.get('value').test(/^([0-9]{4})(?:(1[0-2]|0[1-9])|-?(1[0-2]|0[1-9])-?)(3[0-1]|0[1-9]|[1-2][0-9])$/);
             },
             month:function(input) {
                 return input.get('value').test()
             },
             week:function(input) {
-                return input.get('value').test()
+                // YYYY-WNN(N为数字)
+                return input.get('value').test(/^([0-9]{4})-?W(5[0-3]|[1-4][0-9]|0[1-9])$/);
             },
             time:function(input) {
                  // hh:mm:ss  第一个正则验证的是24小时制 第二个验证是12小时制
