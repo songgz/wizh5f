@@ -21,9 +21,7 @@ WizH5F.Validator = new Class({
                 return input.get('value').test()
             },
             date:function(input) {
-                var tempdate = input.get('value').test(/^(\d{1,4})(-|\/)(\d{1,2})\2(\d{1,2})$/);
-                if(tempdate==null){return false;}
-//                if()
+//                input.get('value').test(/^([0-9]{4})(-)?(1[0-2]|0[1-9])(?(2)-)(3[0-1]|0[1-9])$/)
                 return input.get('value').test()
             },
             month:function(input) {
@@ -76,7 +74,6 @@ WizH5F.Validator = new Class({
     test: function(input) {
         if (input.get('required')) {
             if (!this.options.validators['required'](input)) {
-
                 return false;
             }
         }
