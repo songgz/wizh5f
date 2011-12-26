@@ -6,7 +6,6 @@ WizH5F.Validator = new Class({
                 return input.get('value').length > 0 && (input.get('value') !== input.get('placeholder'));
             },
             text:function(input) {
-//                暂时这么写
                 return true
             },
             search:function(input) {
