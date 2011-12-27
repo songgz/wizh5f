@@ -18,23 +18,25 @@ WizH5F.Validator = new Class({
                 return input.get('value').test(/^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/)
             },
             datetime:function(input) {
-                return input.get('value').test()
+                // YYYY-MM-DD　hh:mm:ss（'-'也可以省略）
+                return input.get('value').test(/^(-?(?:[1-9][0-9]*)?[0-9]{4})-?(1[0-2]|0[1-9])-?(3[0-1]|0[1-9]|[1-2][0-9])(\s+)(2[0-3]|[0-1][0-9]):([0-5][0-9]):([0-5][0-9])(\.[0-9]+)?(Z|[+-](?:2[0-3]|[0-1][0-9]):[0-5][0-9])?$/);
             },
             date:function(input) {
                 // YYYYMMDD 短日期格式
                 return input.get('value').test(/^([0-9]{4})(?:(1[0-2]|0[1-9])|-?(1[0-2]|0[1-9])-?)(3[0-1]|0[1-9]|[1-2][0-9])$/);
             },
             month:function(input) {
-                return input.get('value').test()
+                // YYYY-MM 年月
+                return input.get('value').test(/^([0-9]{4})-?(1[0-2]|0[1-9])$/);
             },
             week:function(input) {
                 // YYYY-WNN(N为数字)
                 return input.get('value').test(/^([0-9]{4})-?W(5[0-3]|[1-4][0-9]|0[1-9])$/);
             },
             time:function(input) {
-                 // hh:mm:ss  第一个正则验证的是24小时制 第二个验证是12小时制
-                return ((input.get('value').test(/^(2[0-3]|[01]?[0-9]):([0-5]?[0-9]):([0-5]?[0-9])$/)) ||
-                    (input.get('value').test(/^(1[0-2]|0?[1-9]):([0-5]?[0-9]):([0-5]?[0-9])$/)));
+                // hh:mm:ss  第一个正则验证的是24小时制（包括了十二小时制）（因此取消第二个表达式 第二个验证是12小时制）
+                return (input.get('value').test(/^(2[0-3]|[01]?[0-9]):([0-5]?[0-9]):([0-5]?[0-9])$/));
+                // (input.get('value').test(/^(1[0-2]|0?[1-9]):([0-5]?[0-9]):([0-5]?[0-9])$/));
             },
             'datetime-local':function(input) {
                 return input.get('value').test();
@@ -93,14 +95,14 @@ WizH5F.Validator = new Class({
     valid: function(input) {
         if (input.get('required')) {
             if (input.get('value') == "" || input.get('value') == input.get('placeholder')) {
-                input.set('class','required_invalid');
+                input.set('class', 'required_invalid');
                 return;
             }
         }
         if (this.test(input)) {
-            input.set('class','valid');
+            input.set('class', 'valid');
         } else {
-            input.set('class','invalid');
+            input.set('class', 'invalid');
         }
     },
     addValidator: function(input) {
