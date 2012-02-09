@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Widget Demo</title>
+    <script type="text/javascript" src="../js/mootools-core-1.4.4-full-nocompat.js"></script>
+    <script type="text/javascript" src="../js/widget.js"></script>
+    <script type="text/javascript" src="../js/calendar.js"></script>
+    <script type="text/javascript" src="../js/date_field.js"></script>
+        <script type="text/javascript">
+        var c;
+        function getn(){
+          alert(c.getDay());
+        };
+        window.addEvent('domready', function() {
+
+            //var w = new WizUi.Widget();
+            c = new WizUi.fields.Date();
+            //alert($(w).hide());
+            //w.hide();
+            //w.show();
+
+        });
+    </script>
+</head>
+<body>
+<a href="#" onclick="getn()">sdfsd</a>
+<div id="sss"></div>
+
+</body>
+</html>

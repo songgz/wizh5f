@@ -99,11 +99,12 @@ WizH5F.Validator = new Class({
                 return;
             }
         }
-        if (this.test(input)) {
+        if (input.getAttribute('type') !== 'submit'){
+        if ( this.test(input) ){
             input.set('class', 'valid');
         } else {
             input.set('class', 'invalid');
-        }
+        }                                          }
     },
     addValidator: function(input) {
         this.valid(input);

@@ -1,6 +1,7 @@
 
 var WizH5F = WizH5F || {
-    version: "0.2.0"
+    version: "0.2.0",
+    fields: {}
 };
 
 WizH5F.Support = function() {
