@@ -19,8 +19,8 @@ WizUi.Widget = new Class({
         //renderTo: null,
         tag: 'div',
         styles:{
-            width: '100px',
-            height: '100px',
+            //width: '100px',
+            //height: '100px',
             border:'1px solid red',
             background:'#efffff',
             position:'relative'
@@ -57,7 +57,7 @@ WizUi.Widget = new Class({
     },
 
     getId: function() {
-        return "win";
+        return "wid"+ Math.round(Math.random() * 1000);
     },
 
     show: function() {
