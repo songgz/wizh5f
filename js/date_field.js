@@ -10,16 +10,19 @@ WizUi.fields.Date = new Class({
     options: {
         styles: {width: '200px', height: '30px'}
     },
-    initialize: function(options){
+    initialize: function(options) {
         this.parent(options);
     },
-    render: function(){
+    render: function() {
         this.parent();
         this.input = new Element('input');
         this.search = new Element('a', {html:'选择'});
-        this.search.addEvent('click', function(){
-            var calendar = new WizUi.fields.Calendar();
-            $(calendar).inject(this.el);
+        var calendar = null;
+        this.search.addEvent('click', function() {
+            if (calendar == null) {
+                calendar = new WizUi.fields.Calendar();
+                $(calendar).inject(this.el);
+            }
         }.bind(this));
         //this.calendar = new WizUi.fields.Calendar();
         this.input.inject(this.el);
