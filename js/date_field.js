@@ -17,12 +17,15 @@ WizUi.fields.Date = new Class({
         this.parent();
         this.input = new Element('input');
         this.search = new Element('a', {html:'选择'});
-        this.search.addEvent('click', function(){
-            var calendar = new WizUi.fields.Calendar();
-            calendar.addEvent('select', function(){
+        var calendar = null;
+        this.search.addEvent('click', function() {
+            if (calendar == null) {
+                calendar = new WizUi.fields.Calendar();
+                calendar.addEvent('select', function(){
                 this.input.value = calendar.getDate();
             }.bind(this));
-            $(calendar).inject(this.el);
+                $(calendar).inject(this.el);
+            }
         }.bind(this));
         //this.calendar = new WizUi.fields.Calendar();
         this.input.inject(this.el);
