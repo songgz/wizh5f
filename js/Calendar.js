@@ -8,11 +8,13 @@
 WizUi.fields.Calendar = new Class({
     Extends: WizUi.Widget,
     options: {
-        weeks: ['日','一', '二','三','四','五','六']
+        weeks: ['日','一', '二','三','四','五','六'],
+        onSelect: Function.from()
     },
     initialize: function(options) {
-        this.currentDate = new Date();
+        this.date = new Date();
         this.parent(options);
+        //this.setOptions(options);
     },
     render: function() {
         this.parent();
@@ -31,52 +33,46 @@ WizUi.fields.Calendar = new Class({
     },
     calHeader: function() {
         var caption = new Element('caption');
-        var pYear = new Element('a', {
-            html: '<<',
-            events: {
-                click: function() {
-                    this.currentDate.setFullYear(this.currentDate.getFullYear() - 1);
-                    this.buildCal();
-                }.bind(this)
-            }
-        });
-        var nYear = new Element('a', {
-            html: '>>',
-            events: {
-                click: function() {
-                    this.currentDate.setFullYear(this.currentDate.getFullYear() + 1);
-                    this.buildCal();
-                }.bind(this)
-            }
-        });
-        var pMonth = new Element('a', {
-            html: '<',
-            events: {
-                click: function() {
-                    this.currentDate.setMonth(this.currentDate.getMonth() - 1);
-                    this.buildCal();
-                }.bind(this)
-            }
-        });
-        var nMonth = new Element('a', {
-            html: '>',
-            events: {
-                click: function() {
-                    this.currentDate.setMonth(this.currentDate.getMonth() + 1);
-                    this.buildCal();
-                }.bind(this)
-            }
-        });
-        var tYear = new Element('span', {html:this.currentDate.getFullYear()});
-        var tMonth = new Element('span', {html:this.currentDate.getMonth() + 1});
-        pYear.inject(caption);
-        pMonth.inject(caption);
-        tYear.inject(caption);
+        var tYear = new Element('span', {html:this.date.getFullYear()});
+        var tMonth = new Element('span', {html:this.date.getMonth() + 1});
+        tYear.inject(caption,'top');
         tMonth.inject(caption);
-        nMonth.inject(caption);
-        nYear.inject(caption);
+        ['pMonth','pYear','nMonth','nYear'].each(function(t){
+            if(t == 'pYear' || t == 'pMonth'){
+                this.addTool(t).inject(caption, 'top');
+            }else{
+                this.addTool(t).inject(caption, 'bottom');
+            }
+        },this);
         caption.inject(this.cal);
     },
+    addTool: function(tbar){
+        var a = new Element('a',{
+                html: tbar,
+                events: {
+                    click: function(){
+                        switch (tbar) {
+                            case 'pYear':
+                                this.date.setFullYear(this.date.getFullYear() - 1);
+                                break;
+                            case 'nYear':
+                                this.date.setFullYear(this.date.getFullYear() + 1);
+                                break;
+                            case 'pMonth':
+                                this.date.setMonth(this.date.getMonth() - 1);
+                                break;
+                            case 'nMonth':
+                                this.date.setMonth(this.date.getMonth() + 1);
+                                break;
+                        }
+                        this.buildCal();
+                    }.bind(this)
+                }
+            });
+        return a;
+    },
+
+
     calWeek: function() {
         var tr = new Element('tr');
         for (var i = 0; i < 7; i++) {
@@ -86,27 +82,34 @@ WizUi.fields.Calendar = new Class({
         tr.inject(this.cal);
     },
     calDay: function() {
-        var week = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth(), 1).getDay();
-        var days = new Date(this.currentDate.getFullYear(), this.currentDate.getMonth() + 1, 0).getDate();
+        var week = new Date(this.date.getFullYear(), this.date.getMonth(), 1).getDay();
+        var days = new Date(this.date.getFullYear(), this.date.getMonth() + 1, 0).getDate();
         for (var r = 1; r <= 6; r++) {
             var tr = new Element('tr');
             for (var c = 1; c <= 7; c++) {
                 var index = (r - 1) * 7 + c;
-                var t = '';
+                var day = '';
                 if (week < index && index <= (days + week)) {
-                    t = index - week;
+                    day = index - week;
                 }
-                var td = new Element('td', {
-                    html: t,
-                    events: {
-                        click: function() {
-                            alert(this.get('html'));
-                        }
-                    }
-                });
-                td.inject(tr);
+                this.addDay(day).inject(tr);
             }
             tr.inject(this.cal);
         }
+    },
+    addDay: function(day){
+        var td = new Element('td', {
+                    html: day,
+                    events: {
+                        click: function() {
+                            this.date.setDate(day);
+                            this.fireEvent('select');
+                        }.bind(this)
+                    }
+                });
+        return td;
+    },
+    getDate: function(){
+        return this.date;
     }
 });

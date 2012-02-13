@@ -38,7 +38,7 @@ WizUi.Widget = new Class({
             id: this.getId(),
             styles: this.options.styles
         });
-        this.el.inject(this.options.renderTo || $(document.body));
+        this.el.inject(this.options.renderTo || document.body || document.documentElement);
 
         //<div id="topbar">window title</div>
 //                var topbar = new Element('div',{
