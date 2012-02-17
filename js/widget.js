@@ -57,7 +57,7 @@ WizUi.Widget = new Class({
     },
 
     getId: function() {
-        return "wid"+ Math.round(Math.random() * 1000);
+        return "wiz"+ Math.round(Math.random() * 1000);
     },
 
     show: function() {

@@ -5,81 +5,82 @@
  * Time: 下午2:28
  * To change this template use File | Settings | File Templates.
  */
-WizUi.fields.Calendar = new Class({
+WizUi.Calendar = new Class({
     Extends: WizUi.Widget,
     options: {
         weeks: ['日','一', '二','三','四','五','六'],
-        onSelect: Function.from()
+        onSelect: Function.from(),
+        styles: {position: 'absolute'}
     },
     initialize: function(options) {
         this.date = new Date();
         this.parent(options);
-        //this.setOptions(options);
     },
     render: function() {
         this.parent();
-        this.cal = new Element('table');
-        this.cal.inject(this.el);
         this.buildCal();
     },
-    getDay: function() {
-        //return this.day;
-    },
     buildCal: function() {
-        this.cal.innerHTML = "";
+        this.cal = new Element('table',{styles: {width:'180px'}});
+        this.tbody = new Element('tbody');
         this.calHeader();
         this.calWeek();
         this.calDay();
+        this.tbody.inject(this.cal);
+        this.cal.inject(this.el);
     },
     calHeader: function() {
-        var caption = new Element('caption');
-        var tYear = new Element('span', {html:this.date.getFullYear()});
-        var tMonth = new Element('span', {html:this.date.getMonth() + 1});
-        tYear.inject(caption,'top');
-        tMonth.inject(caption);
-        ['pMonth','pYear','nMonth','nYear'].each(function(t){
-            if(t == 'pYear' || t == 'pMonth'){
-                this.addTool(t).inject(caption, 'top');
-            }else{
-                this.addTool(t).inject(caption, 'bottom');
-            }
-        },this);
+        var caption = new Element('caption',{styles:{'text-align': 'center'}});
+        [{id:'pYear',name:'&lt;&lt;'},{id:'pMonth' ,name:'&lt;'},{id:'nYear',name:'&gt;&gt;'},{id:'nMonth',name:'&gt;'}].each(function(action) {
+            this.createButton(action).inject(caption);
+        }, this);
+        var title = new Element('span', {
+            html: this.date.getFullYear() + '-' + (this.date.getMonth() + 1),
+            styles: {}
+        });
+        title.inject(caption);
         caption.inject(this.cal);
     },
-    addTool: function(tbar){
-        var a = new Element('a',{
-                html: tbar,
-                events: {
-                    click: function(){
-                        switch (tbar) {
-                            case 'pYear':
-                                this.date.setFullYear(this.date.getFullYear() - 1);
-                                break;
-                            case 'nYear':
-                                this.date.setFullYear(this.date.getFullYear() + 1);
-                                break;
-                            case 'pMonth':
-                                this.date.setMonth(this.date.getMonth() - 1);
-                                break;
-                            case 'nMonth':
-                                this.date.setMonth(this.date.getMonth() + 1);
-                                break;
-                        }
-                        this.buildCal();
-                    }.bind(this)
-                }
-            });
+    createButton: function(action) {
+        var a = new Element('a', {
+            html: action.name,
+            href: "#",
+            styles: {
+                'pYear': {float: 'left', width: '20px'},
+                'pMonth': {float: 'left', width: '20px'},
+                'nMonth': {float: 'right', width: '20px'},
+                'nYear': {float: 'right', width: '20px'}
+            }[action.id],
+            events: {
+                click: function() {
+                    switch (action.id) {
+                        case 'pYear':
+                            this.date.setFullYear(this.date.getFullYear() - 1);
+                            break;
+                        case 'pMonth':
+                            this.date.setMonth(this.date.getMonth() - 1);
+                            break;
+                        case 'nMonth':
+                            this.date.setMonth(this.date.getMonth() + 1);
+                            break;
+                        case 'nYear':
+                            this.date.setFullYear(this.date.getFullYear() + 1);
+                            break;
+                    }
+                    this.el.empty();
+                    this.buildCal();
+                }.bind(this)
+            }
+        });
         return a;
     },
-
-
     calWeek: function() {
         var tr = new Element('tr');
         for (var i = 0; i < 7; i++) {
             var td = Element('th', {html: this.options.weeks[i]});
             td.inject(tr);
         }
-        tr.inject(this.cal);
+        tr.inject(this.tbody);
     },
     calDay: function() {
         var week = new Date(this.date.getFullYear(), this.date.getMonth(), 1).getDay();
@@ -94,22 +95,22 @@ WizUi.fields.Calendar = new Class({
                 }
                 this.addDay(day).inject(tr);
             }
-            tr.inject(this.cal);
+            tr.inject(this.tbody);
         }
     },
-    addDay: function(day){
+    addDay: function(day) {
         var td = new Element('td', {
-                    html: day,
-                    events: {
-                        click: function() {
-                            this.date.setDate(day);
-                            this.fireEvent('select');
-                        }.bind(this)
-                    }
-                });
+            html: day,
+            events: {
+                click: function() {
+                    this.date.setDate(day);
+                    this.fireEvent('select');
+                }.bind(this)
+            }
+        });
         return td;
     },
-    getDate: function(){
+    getDate: function() {
         return this.date;
     }
 });

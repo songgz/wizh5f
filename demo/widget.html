@@ -6,16 +6,13 @@
     <script type="text/javascript" src="../js/mootools-core-1.4.4-full-nocompat.js"></script>
     <script type="text/javascript" src="../js/widget.js"></script>
     <script type="text/javascript" src="../js/calendar.js"></script>
-    <script type="text/javascript" src="../js/date_field.js"></script>
-        <script type="text/javascript">
-        var c;
-        function getn(){
-          alert(c.getDay());
-        };
+    <script type="text/javascript" src="../js/date_picker.js"></script>
+    <script type="text/javascript">
+
         window.addEvent('domready', function() {
 
-            //var w = new WizUi.Widget();
-            c = new WizUi.fields.Date();
+            //var w = new WizUi.fields.Calendar();
+            var c = new WizUi.fields.DatePicker();
 
             //alert($(w).hide());
             //w.hide();
@@ -25,7 +22,7 @@
     </script>
 </head>
 <body>
-<a href="#" onclick="getn()">sdfsd</a>
+
 <div id="sss"></div>
 
 </body>
