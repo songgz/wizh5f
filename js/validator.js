@@ -1,5 +1,5 @@
 WizH5F.Validator = new Class({
-    Implements: [Options],
+    Implements: Options,
     options: {
         validators: {
             required: function(input) {

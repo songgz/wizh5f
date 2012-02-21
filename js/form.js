@@ -1,5 +1,5 @@
 WizH5F.Form = new Class({
-    Implements: [Options],
+    Implements: Options,
     options: {
         forms: 'form'
     },

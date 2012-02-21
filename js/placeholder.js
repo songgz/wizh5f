@@ -1,5 +1,5 @@
 WizH5F.PlaceHolder = new Class({
-    Implements: [Options],
+    Implements: Options,
     options:{
         default_color: 'green',
         color: ''
