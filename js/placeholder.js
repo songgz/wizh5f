@@ -1,7 +1,7 @@
 WizH5F.PlaceHolder = new Class({
     Implements: Options,
     options:{
-        default_color: 'green',
+        default_color: 'gray',
         color: ''
     },
     initialize: function(options) {
