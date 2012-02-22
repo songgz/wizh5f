@@ -30,7 +30,7 @@ WizH5F.Form = new Class({
 //                    this.validator.showInitRequired(input);
 //                }
 //                if (input.getAttribute('type') == 'submit') {
-//                    input.addEvent('click', function () {
+//                    input.addEvent('submit', function () {
 //                        var bpass = true;
 //                        //  表单中没有必填项和非法验证方可提交
 //                        form.getElements('input').each(function (input) {
@@ -40,6 +40,7 @@ WizH5F.Form = new Class({
 //                        });
 //                        if (!bpass) {
 //                            alert("表单验证未通过！");
+//
 //                        }
 //                    });
 //                }
