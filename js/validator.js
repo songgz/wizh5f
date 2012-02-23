@@ -97,30 +97,40 @@ WizH5F.Validator = new Class({
         return true;
     },
     valid:function (input) {
-        if (input.get('required')) {
-            if (input.get('value') == "" || input.get('value') == input.get('placeholder')) {
-                input.set('class', 'required_invalid');
-                return;
+            if (input.get('required')) {
+                if (input.get('value') == "" || input.get('value') == input.get('placeholder')) {
+                    if (!input.hasClass('required_invalid')) {
+                        input.addClass('required_invalid');
+                        return;
+                    }
+                }
             }
-        }
-        if (input.getAttribute('type') !== 'submit') {
-            if (this.test(input)) {
-                input.set('class', 'valid');
-            } else {
-                input.set('class', 'invalid');
+            if (input.getAttribute('type') !== 'submit') {
+                if (this.test(input)) {
+                    input.removeClass('invalid');
+                    input.removeClass('required_invalid');
+                    if (!input.hasClass('valid')) {
+                        input.addClass('valid');
+                    }
+                } else {
+                    input.removeClass('valid');
+                    input.removeClass('required_invalid');
+                    if (!input.hasClass('invalid')) {
+                        input.addClass('invalid');
+                    }
+                }
             }
-        }
-    },
-    addValidator:function (input) {
-//        this.valid(input);
-        input.addEvent('blur', function () {
-            this.valid(input);
-        }.bind(this));
-    },
-//    为表单中的input增加触发事件，并且显示初始化表单中的必填项
-    showInitRequired:function (input) {
-        input.set('class', 'required_invalid');
-    },
+        },
+        addValidator:function (input) {
+    //        this.valid(input);
+            input.addEvent('blur', function () {
+                this.valid(input);
+            }.bind(this));
+        },
+    //    为表单中的input增加触发事件，并且显示初始化表单中的必填项
+        showInitRequired:function (input) {
+            input.addClass('required_invalid');
+        },
     add:function (rule, fn) {
         this.options.validators[rule] = fn;
     }
