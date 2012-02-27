@@ -19,6 +19,9 @@ WizUi.Calendar = new Class({
     render: function() {
         this.parent();
         this.buildCal();
+        this.el.addEvent('mouseleave', function () {
+            this.hide();
+        }.bind(this));
     },
     buildCal: function() {
         this.cal = new Element('table',{styles: {width:'180px'}});
@@ -31,7 +34,12 @@ WizUi.Calendar = new Class({
     },
     calHeader: function() {
         var caption = new Element('caption',{styles:{'text-align': 'center'}});
-        [{id:'pYear',name:'&lt;&lt;'},{id:'pMonth' ,name:'&lt;'},{id:'nYear',name:'&gt;&gt;'},{id:'nMonth',name:'&gt;'}].each(function(action) {
+        [
+            {id:'pYear', name:'<<'},
+            {id:'pMonth', name:'<'},
+            {id:'nYear', name:'>>'},
+            {id:'nMonth', name:'>'}
+        ].each(function (action) {
             this.createButton(action).inject(caption);
         }, this);
         var title = new Element('span', {
@@ -112,5 +120,8 @@ WizUi.Calendar = new Class({
     },
     getDate: function() {
         return this.date;
+    },
+    setDate:function (mydate) {
+        this.date = new (mydate);
     }
 });
