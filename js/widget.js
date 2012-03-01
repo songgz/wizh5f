@@ -8,6 +8,8 @@
 
 var WizUi = {
     version: '0.1',
+    build: '',
+    skin: '',
     fields: {}
 };
 
@@ -34,10 +36,15 @@ WizUi.Widget = new Class({
     },
 
     render: function() {
-        this.el = new Element(this.options.tag, {
-            id: this.getId(),
-            styles: this.options.styles
-        });
+        this.el = new Element(this.options.tag,{
+                    id: this.options.id,
+                    'class': this.options.className,
+                    styles: this.options.styles,
+                    events: this.options.events,
+                    name: this.options.name,
+                    html: this.options.html,
+                    'for': this.options['for']
+                });
         this.el.inject(this.options.renderTo || document.body || document.documentElement);
 
         //<div id="topbar">window title</div>
