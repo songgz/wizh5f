@@ -18,8 +18,8 @@ WizUi.DialogBox = new Class({
     Extends:WizUi.Widget,
     options:{
         styles:{
-            width:'250px',
-            height:'200px',
+            width:'640px',
+            height:'360px',
             border:'1px solid red',
             background:'#efffff',
             position:'relative'
@@ -49,21 +49,35 @@ WizUi.DialogBox = new Class({
     },
     initialize:function (options) {
         this.parent(options);
-        this.update({load: 'ajax', url: 'http://www.baidu.com'})
+        this.content.update(this.options.load);
     },
     render:function () {
         this.parent();
         this.buildTitleBar();
         this.buildContent();
         this.buildResizer();
+        this.el.position();
         this.el.makeDraggable({'handle':this.titleBar});
         this.el.makeResizable({'handle':this.resizer, 'limit':{'x':[220, 400], 'y':[120, 400]}});
+
     },
     buildTitleBar:function () {
         this.titleBar = new Element('div', {
             html:'<sap>' + this.options.title + '</sap>',
             styles:this.options.titleBar.styles
         });
+
+        this.closeButton = new Element('a',{
+            text: 'X',
+            href: '#',
+            styles: { float:'right', 'font-size': '20px' },
+            events:{
+                'click': function(){
+                    this.hide();
+                }.bind(this)
+            }
+        });
+        this.closeButton.inject(this.titleBar);
         this.titleBar.inject(this.el);
     },
     buildResizer:function () {
@@ -71,29 +85,23 @@ WizUi.DialogBox = new Class({
         this.resizer.inject(this.el);
     },
     buildContent:function () {
-        this.content = new Element('div');
+        this.content = new Element('div',{class:''});
         this.content.inject(this.el);
     },
-    update:function (options) {
-        switch (options.load) {
-            case 'ajax':
-                if (options.url) {
-                    var request = new Request.HTML({
-                        evalScripts:true,
-                        url:options.url,
-                        method:'get',
-                        onComplete:function (responseTree, responseElements, responseHTML, responseJavaScript) {
-                            this.content.set('html', 'responseHTML');
-                        }.bind(this)
-                    }).send();
-                }
-                break;
-            case 'html':
-                break;
-        }
 
+    close: function(){
+        this.el.dispose();
     }
 });
+
+WizUi.DialogBox.overlay = function(options){
+    this.box = this.box || new WizUi.DialogBox(options);
+    this.box.hide();
+}
+WizUi.DialogBox.update = function(option){
+    this.box.content.update(option);
+    this.box.show();
+}
 
 //<div id="topbar">window title</div>
 //                var topbar = new Element('div',{
