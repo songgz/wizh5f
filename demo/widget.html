@@ -3,16 +3,19 @@
 <head>
     <meta charset="utf-8">
     <title>Widget Demo</title>
-    <script type="text/javascript" src="../js/mootools-core-1.4.4-full-nocompat.js"></script>
+    <script type="text/javascript" src="../js/mootools-core-1.4.5-full-compat.js"></script>
+    <script type="text/javascript" src="../js/mootools-more-1.4.0.1.js"></script>
     <script type="text/javascript" src="../js/widget.js"></script>
     <script type="text/javascript" src="../js/calendar.js"></script>
     <script type="text/javascript" src="../js/date_picker.js"></script>
+    <script type="text/javascript" src="../js/dialog_box.js"></script>
     <script type="text/javascript">
 
         window.addEvent('domready', function() {
 
             //var w = new WizUi.fields.Calendar();
-            var c = new WizUi.fields.DatePicker();
+            //var c = new WizUi.fields.DatePicker();
+            var d = new WizUi.DialogBox({title:'my window',ajax:'http://www.baidu.com'});
 
             //alert($(w).hide());
             //w.hide();

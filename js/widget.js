@@ -46,21 +46,6 @@ WizUi.Widget = new Class({
                     'for': this.options['for']
                 });
         this.el.inject(this.options.renderTo || document.body || document.documentElement);
-
-        //<div id="topbar">window title</div>
-//                var topbar = new Element('div',{
-//                    id: 'topbar',
-//                    html: 'window title',
-//                    style: "height:20px;background:#dfdfdf;border-bottom:1px solid red;cursor:move;text-align:center"
-//
-//                });
-        //<div id="resizer"></div>
-//                var resizer = new Element('div',{id: 'resizer',style:"width:20px;height:20px;top:100%;margin-top:-20px; left:100%; margin-left:-20px;background:green;position:absolute;cursor:se-resize;"});
-//                topbar.inject(this.options.el);
-//                resizer.inject(this.options.el);
-//                this.options.el.makeDraggable({'handle':topbar});
-//                this.options.el.makeResizable({'handle':resizer , 'limit':{'x':[220,400], 'y':[120,400]}});
-
     },
 
     getId: function() {

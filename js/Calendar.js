@@ -51,7 +51,7 @@ WizUi.Calendar = new Class({
     },
     createButton: function(action) {
         var a = new Element('a', {
-            html: action.name,
+            text: action.name,
             href: "#",
             styles: {
                 'pYear': {float: 'left', width: '20px'},
