@@ -4,10 +4,22 @@
  * Date: 12-2-9
  * Time: 下午2:28
  * To change this template use File | Settings | File Templates.
+ *
+ * requires:
+   - Core/Array
+   - Core/String
+   - Core/Number
+   - MooTools.More
+   - Locale
+   - Locale.en-US.Date
+
+ provides: [Date]
  */
 WizUi.Calendar = new Class({
     Extends: WizUi.Widget,
     options: {
+        className:'wiz-calendar',
+        hidden: true,
         weeks: ['日','一', '二','三','四','五','六'],
         onSelect: Function.from(),
         styles: {position: 'absolute'}
@@ -16,12 +28,8 @@ WizUi.Calendar = new Class({
         this.date = new Date();
         this.parent(options);
     },
-    render: function() {
-        this.parent();
+    doRender: function() {
         this.buildCal();
-        this.el.addEvent('mouseleave', function () {
-            this.hide();
-        }.bind(this));
     },
     buildCal: function() {
         this.cal = new Element('table',{styles: {width:'180px'}});
@@ -33,7 +41,7 @@ WizUi.Calendar = new Class({
         this.cal.inject(this.el);
     },
     calHeader: function() {
-        var caption = new Element('caption',{styles:{'text-align': 'center'}});
+        var caption = new Element('caption',{'class':'header'});
         [
             {id:'pYear', name:'<<'},
             {id:'pMonth', name:'<'},
@@ -75,8 +83,7 @@ WizUi.Calendar = new Class({
                             this.date.setFullYear(this.date.getFullYear() + 1);
                             break;
                     }
-                    this.el.empty();
-                    this.buildCal();
+                    this.refresh();
                 }.bind(this)
             }
         });
@@ -93,7 +100,8 @@ WizUi.Calendar = new Class({
     calDay: function() {
         var week = new Date(this.date.getFullYear(), this.date.getMonth(), 1).getDay();
         var days = new Date(this.date.getFullYear(), this.date.getMonth() + 1, 0).getDate();
-        for (var r = 1; r <= 6; r++) {
+        var row = Math.ceil((week + days)/7);
+        for (var r = 1; r <= row; r++) {
             var tr = new Element('tr');
             for (var c = 1; c <= 7; c++) {
                 var index = (r - 1) * 7 + c;
@@ -113,15 +121,22 @@ WizUi.Calendar = new Class({
                 click: function() {
                     this.date.setDate(day);
                     this.fireEvent('select');
+                    //td.addClass('selected');
                 }.bind(this)
             }
         });
+        ///alert(this.date.get('date'));
+        if (day.toString() === this.date.get('date').toString()) td.addClass('selected');
         return td;
     },
-    getDate: function() {
-        return this.date;
+    getDate: function(format) {
+        return this.date.format(format || '%Y-%m-%d');
     },
-    setDate:function (mydate) {
-        this.date = new (mydate);
+    setDate:function (date) {
+        this.date = Date.parse(date);
+    },
+    refresh:function(){
+        this.el.empty();
+        this.buildCal();
     }
 });

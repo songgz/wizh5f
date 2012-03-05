@@ -1,3 +1,11 @@
+/**
+ * Created by JetBrains RubyMine.
+ * User: Administrator
+ * Date: 12-3-3
+ * Time: 下午3:27
+ * To change this template use File | Settings | File Templates.
+ */
+
 /*
  license: MIT-style
 
@@ -13,13 +21,10 @@
  - DialogBox
  */
 
-
-WizUi.DialogBox = new Class({
+WizUi.LightBox = new Class({
     Extends:WizUi.Widget,
     options:{
-        className:'dialog-box',
-        resizable:true,
-        draggable:true,
+        className:'light-box',
         hidden:true,
         width:640,
         height:360,
@@ -27,22 +32,16 @@ WizUi.DialogBox = new Class({
     },
     initialize:function (options) {
         this.parent(options);
-        //this.content.update(this.options.load);
+        this.overlay = new WizUi.Overlay(this.getBody());
     },
     doRender:function () {
-        this.buildTitleBar();
         this.buildContent();
-        this.buildResizer();
+        this.buildCloseButton();
         this.el.position();
-        this.el.makeDraggable({'handle':this.titleBar});
     },
-    buildTitleBar:function () {
-        this.titleBar = new Element('div', {
-            'class':'header',
-            html:'<h1 class="title">' + this.options.title + '</h1>'
-        });
+    buildCloseButton:function () {
         this.closeButton = new Element('a', {
-            text:'X',
+            //text:'X',
             href:'#',
             'class':'close-button',
             events:{
@@ -51,23 +50,29 @@ WizUi.DialogBox = new Class({
                 }.bind(this)
             }
         });
-        this.closeButton.inject(this.titleBar);
-        this.titleBar.inject(this.el);
-    },
-    buildResizer:function () {
-        this.resizer = new Element('div', {id:'resizer', 'class':'resize'});
-        this.resizer.inject(this.el);
-        this.el.makeResizable({'handle':this.resizer});
+        this.closeButton.inject(this.el);
     },
     buildContent:function () {
         this.content = new Element('div', {'class':'content'});
         this.content.inject(this.el);
     },
-
-    close:function () {
-        this.el.dispose();
+    show:function () {
+        this.overlay.open();
+        this.parent();
+        return this;
+    },
+    hide:function () {
+        this.parent();
+        this.overlay.close();
+        return this;
     },
     setContent:function (method, source, options) {
-
+        this.content.update(method, source, options);
+        return this;
     }
 });
+WizUi.LightBox.getInstance = function (options) {
+    this.box = this.box || new window.WizUi.LightBox(options);
+    return this.box;
+};
+

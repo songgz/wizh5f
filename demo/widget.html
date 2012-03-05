@@ -3,6 +3,7 @@
 <head>
     <meta charset="utf-8">
     <title>Widget Demo</title>
+    <link rel="stylesheet" type="text/css" href="../css/rubric.css"/>
     <script type="text/javascript" src="../js/mootools-core-1.4.5-full-compat.js"></script>
     <script type="text/javascript" src="../js/mootools-more-1.4.0.1.js"></script>
     <script type="text/javascript" src="../js/widget.js"></script>
@@ -15,7 +16,7 @@
 
             //var w = new WizUi.fields.Calendar();
             //var c = new WizUi.fields.DatePicker();
-            var d = new WizUi.DialogBox({title:'my window',ajax:'http://www.baidu.com'});
+            var d = new WizUi.DialogBox({title:'my window'}).render().show();
 
             //alert($(w).hide());
             //w.hide();

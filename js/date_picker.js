@@ -6,29 +6,36 @@
  * To change this template use File | Settings | File Templates.
  */
 WizUi.fields.DatePicker = new Class({
-    Extends:Options,
+    Extends:WizUi.Widget,
     options:{
         //styles: {width: '200px', height: '30px'},
-        field:'input[type=date]'
+        //field:'input[type=date]'
+        tag:'input'
     },
     initialize:function (options) {
-        this.setOptions(options);
-        var inputs = $$(this.options.field);
-        inputs.each(function (input) {
-            var xy = this.getXY(input);
-            input.addEvent('click', function () {
-                var calendar = new WizUi.Calendar({styles:{top:xy.top + 24, left:xy.left},date:input.get('value')});
-                calendar.addEvents({
-                    'select': function () {
-                        input.set('value', calendar.getDate());
-                        calendar.hide();
-                    }.bind(this)
-                });
-            }, this);
-
-        }, this);
+        this.parent(options);
     },
-
+    doRender:function () {
+        this.el.addEvent('click', function () {
+            this.calendar = this.calendar || this.buildCalendar();
+            this.calendar.refresh();
+            this.calendar.show();
+        }.bind(this));
+    },
+    buildCalendar:function () {
+        var xy = this.getXY(this.el);
+        this.calendar = new WizUi.Calendar({styles:{top:xy.top + 24, left:xy.left}}).render();
+        this.calendar.addEvents({
+            'select':function () {
+                this.el.set('value', this.calendar.getDate());
+                this.calendar.hide();
+            }.bind(this)
+        });
+        $(this.calendar).addEvent('mouseleave', function () {
+            this.hide();
+        });
+        return this.calendar;
+    },
     getXY:function (el) {
         var box = el.getBoundingClientRect();
         var doc = el.ownerDocument;
@@ -39,26 +46,8 @@ WizUi.fields.DatePicker = new Class({
         var top = box.top + (self.pageYOffset || html.scrollTop || body.scrollTop ) - clientTop;
         var left = box.left + (self.pageXOffset || html.scrollLeft || body.scrollLeft) - clientLeft;
         return { 'top':top, 'left':left };
+    },
+    setDate:function () {
+
     }
-//    render:function () {
-//        this.parent();
-//        this.input = new Element('input');
-//        this.search = new Element('a', {html:'选择'});
-//        var calendar = null;
-//        this.search.addEvent('click', function () {
-//            if (calendar == null) {
-//                calendar = new WizUi.Calendar();
-//                calendar.addEvent('select', function () {
-//                    this.input.set('value', calendar.getDate());
-//                    calendar.hide();
-//                }.bind(this));
-//                $(calendar).inject(this.el);
-//            } else {
-//                calendar.show();
-//            }
-//        }.bind(this));
-//        //this.calendar = new WizUi.fields.Calendar();
-//        this.input.inject(this.el);
-//        this.search.inject(this.el);
-//    }
 });

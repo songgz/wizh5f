@@ -9,15 +9,16 @@ WizH5F.Form = new Class({
         this.placeholder = new WizH5F.PlaceHolder();
         this.forms = $$(this.options.forms);
         this.forms.each(function (form) {
+            form.addEvent('submit',function(){
+                var bpass = true;
+                    this.getElements('input').each(function (input) {
+                        if (input.hasClass('invalid') || input.hasClass('required_invalid')) {
+                            bpass = false;
+                        }
+                    });
+                return bpass;
+            });
             form.getElements('input').each(function (input) {
-//                if (!WizH5F.Support.hasTypeSupport(input.getAttribute('type'))) {
-//                    if (!WizH5F.Support.hasAttributeSupport('placeholder')) {
-//                        this.placeholder.addPlaceholder(input);
-//                    }
-//                    if (!WizH5F.Support.hasAttributeSupport('validity')) {
-//                        this.validator.addValidator(input);
-//                    }
-//                }
                 if (!WizH5F.Support.hasAttributeSupport('placeholder')) {
                     this.placeholder.addPlaceholder(input);
                 }
@@ -25,25 +26,9 @@ WizH5F.Form = new Class({
                 if (input.get('required') == 'required') {
                     this.validator.showInitRequired(input);
                 }
-//                this.validator.addValidator(input);
-//                if (input.get('required') == 'required') {
-//                    this.validator.showInitRequired(input);
-//                }
-//                if (input.getAttribute('type') == 'submit') {
-//                    input.addEvent('submit', function () {
-//                        var bpass = true;
-//                        //  表单中没有必填项和非法验证方可提交
-//                        form.getElements('input').each(function (input) {
-//                            if (input.hasClass('invalid') || input.hasClass('required_invalid')) {
-//                                bpass = false;
-//                            }
-//                        });
-//                        if (!bpass) {
-//                            alert("表单验证未通过！");
-//
-//                        }
-//                    });
-//                }
+                if(input.getAttribute('type') == 'date'){
+                    new WizUi.fields.DatePicker({applyTo:input});
+                }
             }, this);
 //            form.getElements("input").each(function(input) {
 //                ///if (!WizH5F.Support.hasTypeSupport(input.getAttribute('type')) ) {
@@ -55,11 +40,8 @@ WizH5F.Form = new Class({
 //                    //}
 //
 //                //}
-//
 ////                alert(!WizH5F.Support.hasAttributeSupport('validity'));
-//
-//
-//            }, this);
+////            }, this);
         }, this);
     }
 });
