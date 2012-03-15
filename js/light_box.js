@@ -53,8 +53,11 @@ WizUi.LightBox = new Class({
         this.closeButton.inject(this.el);
     },
     buildContent:function () {
-        this.content = new Element('div', {'class':'content'});
-        this.content.inject(this.el);
+        this.content = new WizUi.View({
+                    renderTo:this.el,
+                    'className':'content'
+        });
+
     },
     show:function () {
         this.overlay.open();
@@ -66,8 +69,8 @@ WizUi.LightBox = new Class({
         this.overlay.close();
         return this;
     },
-    setContent:function (method, source, options) {
-        this.content.update(method, source, options);
+    setContent:function (method, source) {
+        this.content.setContent(method, source);
         return this;
     }
 });

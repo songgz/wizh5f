@@ -20,14 +20,14 @@ WizUi.DialogBox = new Class({
         className:'dialog-box',
         resizable:true,
         draggable:true,
-        hidden:true,
+        hidden:false,
         width:640,
         height:360,
+        'max-height':315,
         title:''
     },
     initialize:function (options) {
         this.parent(options);
-        //this.content.update(this.options.load);
     },
     doRender:function () {
         this.buildTitleBar();
@@ -40,7 +40,7 @@ WizUi.DialogBox = new Class({
         this.titleBar = new Element('div', {
             'class':'header',
             html:'<h1 class="title">' + this.options.title + '</h1>'
-        });
+        }).inject(this.el);
         this.closeButton = new Element('a', {
             text:'X',
             href:'#',
@@ -50,24 +50,25 @@ WizUi.DialogBox = new Class({
                     this.hide();
                 }.bind(this)
             }
-        });
-        this.closeButton.inject(this.titleBar);
-        this.titleBar.inject(this.el);
+        }).inject(this.titleBar);
     },
     buildResizer:function () {
-        this.resizer = new Element('div', {id:'resizer', 'class':'resize'});
-        this.resizer.inject(this.el);
+        this.resizer = new Element('div', {id:'resizer', 'class':'resize'}).inject(this.el);
         this.el.makeResizable({'handle':this.resizer});
     },
     buildContent:function () {
-        this.content = new Element('div', {'class':'content'});
-        this.content.inject(this.el);
-    },
-
-    close:function () {
-        this.el.dispose();
+        this.content = new WizUi.View({
+            renderTo:this.el,
+            'className':'content',
+            'max-height':this.options['max-height']
+        }).setStyle('max-height', this.options['max-height']).addEvents({
+                'loadComplete':function () {
+                    this.fireEvent('complete');
+                }.bind(this)
+            });
     },
     setContent:function (method, source, options) {
-
+        this.content.setContent(method, source, options);
+        return this;
     }
 });

@@ -18,35 +18,12 @@ var WizUi = {
     fields:{}
 };
 
-Element.implement({
-    update:function (method, source, options) {
-        switch (method) {
-            case 'ajax':
-                var request = new Request.HTML({
-                    evalScripts:true,
-                    url:source,
-                    method:'get',
-                    onComplete:function (responseTree, responseElements, responseHTML, responseJavaScript) {
-                        this.set('html', responseHTML);
-                    }.bind(this)
-                }).send();
-
-                break;
-            case 'html':
-                this.set('html', source);
-                break;
-        }
-    }
-
-});
-
 WizUi.Widget = new Class({
     Implements:[Options, Events],
     options:{
         //className : '',
         //width   : 0,
         //height  : 0,
-        //title   : '',
         //applyTo : '',
         //renderTo: '',
         //resizable : true,
@@ -55,17 +32,9 @@ WizUi.Widget = new Class({
         //draggable: false,
         //position: null,
 
-        tag:'div',
+        autoEl:'div', //{tag:'div',name:'ss'}
         hidden:false,
-        rendered:false,
-        allowDomMove: true,
-        styles:{
-            //width: '100px',
-            //height: '100px',
-            border:'1px solid red'
-            //background:'#efffff',
-            //position:'relative'
-        }
+        allowDomMove:true
     },
     initialize:function (options) {
         this.setOptions(options);
@@ -82,23 +51,30 @@ WizUi.Widget = new Class({
         this.options.allowDomMove = false;
         this.render(this.el.getParent());
     },
-    getBody:function () {
-        return document.body || document.documentElement;
-    },
     render:function (container, position) {
-        if (!this.options.rendered) {
-            if (!this.el){
-                this.el = new Element(this.options.tag, {
-                    id:this.options.id,
-                    'class':this.options.className,
-                    styles:this.options.styles,
-                    events:this.options.events,
-                    name:this.options.name,
-                    html:this.options.html,
-                    'for':this.options['for']
-                });
-
+        if (!this.rendered) {
+            this.rendered = true;
+            if (!this.el) {
+                if (typeOf(this.options.autoEl) == 'string') {
+                    this.el = new Element(this.options.autoEl);
+                } else {
+                    this.el = new Element(this.options.autoEl.tag, this.options.autoEl);
+                }
             }
+            if (this.options.allowDomMove) this.el.inject(container || this.getBody(), position);
+
+            if (!this.el.get('id')) {
+                this.el.set('id', this.getId());
+            }
+            if (this.options.className) {
+                this.el.addClass(this.options.className);
+                delete this.options.className;
+            }
+            if (this.options.styles) {
+                this.el.setStyles(this.options.styles);
+                delete this.options.styles;
+            }
+
             if (this.options.hidden) this.hide();
             if (this.options.width) {
                 this.el.setStyle('width', this.options.width);
@@ -108,32 +84,65 @@ WizUi.Widget = new Class({
                 this.el.setStyle('height', this.options.height);
                 delete this.options.height;
             }
-            if (this.options.allowDomMove) this.el.inject(container || this.getBody(), position);
             this.doRender();
-            this.options.rendered = true;
         }
         return this;
     },
-    doRender: function(){
+    doRender:function () {
 
     },
     getId:function () {
         return "wiz" + Math.round(Math.random() * 1000);
+    },
+    getBody:function () {
+        return document.body || document.documentElement;
     },
 
     show:function () {
         //this.el.setStyle('display', '');
         this.el.show();
     },
-
     hide:function () {
         //this.el.setStyle('display', 'none');
         this.el.hide(); //setStyle('display', 'hidden');
-
     },
-
     toElement:function () {
         return this.el;
+    },
+
+    /*------------Native Mootools Element:----------------------*/
+    setStyle:function (style, value) {
+        this.el.setStyle(style, value);
+        return this;
+    },
+    getStyle:function (style) {
+        return this.el.getStyle(style);
+    },
+    inject:function (container, position) {
+        this.el.inject(container, position);
+        return this;
+    },
+    adopt:function (element) {
+        this.el.adopt(element);
+        return this;
+    },
+    addClass:function (className) {
+        this.el.addClass(className);
+        return this;
+    },
+    set:function (property, value) {
+        this.el.set(property, value);
+        return this;
+    },
+    get:function (property) {
+        return this.el.get(property);
+    },
+    getCoordinates:function (ref) {
+        return this.el.getCoordinates(ref);
+    },
+    destroy:function () {
+        this.el.destroy();
+        return;
     }
 
 });

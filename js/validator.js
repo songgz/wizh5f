@@ -42,7 +42,9 @@ WizH5F.Validator = new Class({
                 return input.get('value').test();
             },
             'number':function (input) {
-                return input.get('value').test(/^[0-9]*$/);
+//                非空 且为整数
+//                return input.get('value').test(/^[0-9]*$/);
+                return true;
             },
             range:function (input) {
                 return input.get('value').test();
@@ -51,7 +53,8 @@ WizH5F.Validator = new Class({
 //                    return input.get('value').test();
 //                },
             checkbox:function (input) {
-                return input.get('value').test()
+//                return input.get('value').test()
+                return true;
             },
             image:function (input) {
                 return input.get('value').test()
@@ -63,6 +66,29 @@ WizH5F.Validator = new Class({
             },
             pattern:function (input) {
                 return input.get('value').match(/input.get('pattern')/)
+            },
+//            数值区间 如果第三位为0则不包含第一位数值，为1则包含，第四位同理
+            range_data:function (input) {
+                var real_value = input.get('value');
+                var temp = input.get('range_data').split(',');
+                var start = temp[0];
+                var end = temp[1];
+                var startContain = temp[2];
+                var endContain = temp[3];
+                if (startContain == 0 && endContain == 0) {
+                    if (real_value > start && real_value < end)
+                        return true;
+                } else if (startContain == 0 && endContain == 1) {
+                    if (real_value > start && real_value <= end)
+                        return true;
+                } else if (startContain == 1 && endContain == 0) {
+                    if (real_value >= start && real_value < end)
+                        return true;
+                } else if (startContain == 1 && endContain == 1) {
+                    if (real_value >= start && real_value <= end)
+                        return true;
+                }
+                return false;
             }
         },
         errors:{
@@ -72,16 +98,21 @@ WizH5F.Validator = new Class({
     },
     initialize:function (options) {
         this.setOptions(options);
-//        alert(input.get('required'));
     },
     test:function (input) {
-        if (input.get('required')) {
-            if (!this.options.validators['required'](input)) {
+//        if (input.get('required')) {
+//            if (!this.options.validators['required'](input)) {
+//                alert(this.options.errors['required']);
+//                return false;
+//            }
+//        }
+        if (input.get("pattern")) {
+            if (!this.options.validators['pattern'](input)) {
                 return false;
             }
         }
-        if (input.get("pattern")) {
-            if (!this.options.validators['pattern'](input)) {
+        if (input.get("range_data")) {
+            if (!this.options.validators['range_data'](input)) {
                 return false;
             }
         }
@@ -97,43 +128,65 @@ WizH5F.Validator = new Class({
         return true;
     },
     valid:function (input) {
-            if (input.get('required')) {
-                if (input.get('value') == "" || input.get('value') == input.get('placeholder')) {
-                    if (!input.hasClass('required_invalid')) {
-                        input.addClass('required_invalid');
-                        return;
-                    }
+//        是必填项 如果为空或者为占位符 那么就显示必填项的图标 不需进行验证
+        if ((input.get('required')) && (input.get('value') == "" || input.get('value') == input.get('placeholder'))) {
+            input.removeClass('invalid');
+            input.removeClass('valid');
+            this.hideMsg(input);
+            if (!input.hasClass('required_invalid')) {
+                input.addClass('required_invalid');
+            }
+            return true;
+        }
+//      以下是对 是必填项 且值不为空 也不为占位符的进行验证 以及不是必填项的数据输入值进行验证
+        if (input.getAttribute('type') !== 'submit') {
+            if (this.test(input)) {
+                input.removeClass('invalid');
+                input.removeClass('required_invalid');
+                this.hideMsg(input);
+                if (!input.hasClass('valid')) {
+                    input.addClass('valid');
+                }
+            } else {
+//      验证未通过要显示错误提示信息
+                input.removeClass('valid');
+                input.removeClass('required_invalid');
+                if (!input.hasClass('invalid')) {
+                    input.addClass('invalid');
+                    var tempmsg = input.get('errorMsg') || this.options.errors[input.getAttribute('type')];
+                    this.showMsg(input, tempmsg);
                 }
             }
-            if (input.getAttribute('type') !== 'submit') {
-                if (this.test(input)) {
-                    input.removeClass('invalid');
-                    input.removeClass('required_invalid');
-                    if (!input.hasClass('valid')) {
-                        input.addClass('valid');
-                    }
-                } else {
-                    input.removeClass('valid');
-                    input.removeClass('required_invalid');
-                    if (!input.hasClass('invalid')) {
-                        input.addClass('invalid');
-                    }
-                }
-            }
-        },
-        addValidator:function (input) {
-    //        this.valid(input);
-            input.addEvent('blur', function () {
-                this.valid(input);
-            }.bind(this));
-        },
-    //    为表单中的input增加触发事件，并且显示初始化表单中的必填项
-        showInitRequired:function (input) {
+        }
+    },
+    addValidator:function (input) {
+        input.addEvent('blur', function () {
+            this.valid(input);
+        }.bind(this));
+    },
+//    为表单中的input增加触发事件，并且显示初始化表单中的必填项
+    showInitRequired:function (input) {
+        if ((input.get('required')) && (input.get('value') == "" || input.get('value') == input.get('placeholder'))) {
             input.addClass('required_invalid');
-        },
+        }
+    },
     add:function (rule, fn) {
         this.options.validators[rule] = fn;
-    }
+    },
+    showMsg:function (input, msg) {
+        if (!document.id(input.id + '_msg')) {
+            var message = new Element('div#' + input.id + '_msg');
+            message.appendText(msg);
+            message.set('class', 'msg');
+            message.inject(input, 'after');
+        }
+    },
+    hideMsg:function (input) {
+        var getEl = document.id(input.id + '_msg');
+        if (getEl != null) {
+            getEl.destroy();
+        }
 
+    }
 });
 

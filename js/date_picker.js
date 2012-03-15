@@ -6,28 +6,24 @@
  * To change this template use File | Settings | File Templates.
  */
 WizUi.fields.DatePicker = new Class({
-    Extends:WizUi.Widget,
+    Extends:WizUi.fields.TriggerPicker,
     options:{
-        //styles: {width: '200px', height: '30px'},
-        //field:'input[type=date]'
-        tag:'input'
+
     },
     initialize:function (options) {
         this.parent(options);
     },
-    doRender:function () {
-        this.el.addEvent('click', function () {
-            this.calendar = this.calendar || this.buildCalendar();
-            this.calendar.refresh();
-            this.calendar.show();
-        }.bind(this));
+    onTriggerClick:function () {
+        this.calendar = this.calendar || this.buildCalendar();
+        this.calendar.refresh();
+        this.calendar.show();
     },
     buildCalendar:function () {
         var xy = this.getXY(this.el);
         this.calendar = new WizUi.Calendar({styles:{top:xy.top + 24, left:xy.left}}).render();
         this.calendar.addEvents({
             'select':function () {
-                this.el.set('value', this.calendar.getDate());
+                this.fieldEl.set('value', this.calendar.getDate());
                 this.calendar.hide();
             }.bind(this)
         });
