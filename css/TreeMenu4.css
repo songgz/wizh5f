@@ -1,0 +1,115 @@
+
+
+/*BOX*/
+#TreeMenu4 {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 1em;
+	
+	
+	width: 160px;
+	padding: 3px 5px 3px 5px;
+	background-color: #1d499a;
+	
+	
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	
+	
+	-moz-box-shadow: 0px 0px 3px  #000000;
+	-webkit-box-shadow: 0px 0px 3px  #000000;
+	
+	box-shadow: 0px 0px 3px  #000000;
+}
+#TreeMenu4 li {
+	display: block;
+	overflow: hidden;
+	
+	
+	/*Modify here*/
+
+	width: 160px;
+}
+#TreeMenu4 ul {
+	margin:0;
+	padding:0;
+	
+	
+}
+#TreeMenu4 li span a {
+	display: block;
+	text-decoration: none;
+	padding-left: 13px;
+	
+	padding-top: 2px;
+	padding-bottom: 2px;
+}
+#TreeMenu4 ._tree_menu_collapsed{
+	background: url(../images/collapsed.png) 3px center no-repeat;
+}
+#TreeMenu4 ._tree_menu_expanded {
+	background: url(../images/expanded.png) 3px center no-repeat;
+}
+
+#TreeMenu4 li._tree_menu_item_level_0 > span > a { 
+	font-weight: bold;
+}
+
+
+#TreeMenu4 span {
+	display: block;
+	margin:0;
+	padding: 0;
+	
+	margin-bottom:1px;
+	
+	background-color: #DEAE54;
+	
+	
+	
+	background-image:    -moz-linear-gradient(top, #e5bc75, #CE9327);
+	/* Safari 4+, Chrome 1-9 */
+    background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#e5bc75), to(#CE9327));
+
+	/* Safari 5.1+, Mobile Safari, Chrome 10+ */
+	background-image: -webkit-linear-gradient(top, #e5bc75, #CE9327);
+
+	 /* IE 10+ */
+   	background-image: -ms-linear-gradient(top, #e5bc75, #CE9327);
+   	
+   	/* Opera 11.10+ */
+    background-image: -o-linear-gradient(top, #e5bc75, #CE9327);
+
+
+	
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	border-radius: 2px;
+	
+}
+#TreeMenu4 li span.hover {
+	background-color: #DEAE54;
+	
+	
+
+
+	background-image:    -moz-linear-gradient(top, #f2ddb8, #CE9327);
+	/* Safari 4+, Chrome 1-9 */
+    background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#f2ddb8), to(#CE9327));
+
+	/* Safari 5.1+, Mobile Safari, Chrome 10+ */
+	background-image: -webkit-linear-gradient(top, #f2ddb8, #CE9327);
+
+	 /* IE 10+ */
+   	background-image: -ms-linear-gradient(top, #f2ddb8, #CE9327);
+   	
+   	/* Opera 11.10+ */
+    background-image: -o-linear-gradient(top, #f2ddb8, #CE9327);
+}
+#TreeMenu4 li span.current {
+	background-color: #b7c8be;
+	background-image: none;
+}
+
+
+

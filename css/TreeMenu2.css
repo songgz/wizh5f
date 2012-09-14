@@ -1,0 +1,60 @@
+
+
+/*BOX*/
+#TreeMenu2 {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 1em;
+}
+#TreeMenu2 li {
+	display: block;
+	overflow: hidden;
+	
+	
+	/*Modify here*/
+	
+	width: 170px;
+
+}
+#TreeMenu2 ul {
+	
+	margin:0;
+	padding:0;
+	
+
+}
+#TreeMenu2 ._tree_menu_collapsed{
+	background: url(../images/collapsed.png) 3px center no-repeat;
+}
+#TreeMenu2 ._tree_menu_expanded {
+	background: url(../images/expanded.png) 3px center no-repeat;
+}
+#TreeMenu2 span {
+	display: block;
+	margin:0;
+	padding: 0;
+	padding-left: 10px;
+	border: 1px solid #bbbbbb;
+	background-color: #eeeeee;
+	
+	margin-bottom: 2px;
+}
+#TreeMenu2 a {
+	display: block;
+	display: block;
+	text-decoration: none;
+	padding-left: 14px;
+}
+#TreeMenu2 li._tree_menu_item_level_0 > span > a {
+	padding-top:4px;
+	padding-bottom: 4px;
+}
+
+#TreeMenu2 li span.hover {
+	background-color: #cccccc;
+}
+#TreeMenu2 li span.current {
+	background-color: #aaaaaa;
+}
+#TreeMenu2 li span a:hover {
+	
+}

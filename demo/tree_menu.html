@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Tree Menu Demo</title>
+    <link href="../css/TreeMenu.css" rel="stylesheet" type="text/css" />
+    <link href="../css/TreeMenu2.css" rel="stylesheet" type="text/css" />
+    <link href="../css/TreeMenu3.css" rel="stylesheet" type="text/css" />
+    <link href="../css/TreeMenu4.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="../js/mootools-core-1.4.5-full-compat.js"></script>
+    <script type="text/javascript" src="../js/mootools-more-1.4.0.1.js"></script>
+    <script type="text/javascript" src="../js/widget.js"></script>
+    <script type="text/javascript" src="../js/tree_menu_item.js"></script>
+    <script type="text/javascript" src="../js/tree_menu.js"></script>
+    <script type="text/javascript">
+        window.addEvent('domready', function () {
+
+            var d = new WizUi.TreeMenu({applyTo:'TreeMenu4'});
+
+        });
+    </script>
+</head>
+<body>
+<div id="TreeMenu4">
+    <ul>
+        <li><span><a href="#">Movies</a></span>
+            <ul>
+                <li><span><a href="#">Horror</a></span></li>
+                <li><span><a href="#">Comedy</a></span></li>
+                <li><span><a href="#">Action</a></span></li>
+            </ul>
+        </li>
+        <li><span><a href="#" class="music">Music</a></span>
+            <ul>
+                <li><span><a href="#">Pop</a></span></li>
+                <li><span><a href="#">Rock</a></span>
+
+                    <ul>
+                        <li><span><a href="#">Metal</a></span></li>
+                        <li><span><a href="#">Slow Rock</a></span>
+                            <ul>
+                                <li><span><a href="#">Ballads</a></span></li>
+                                <li><span><a href="#">80's</a></span></li>
+                                <li><span><a href="#">90's</a></span></li>
+                            </ul>
+                        </li>
+                        <li><span><a href="#">Love Song</a></span></li>
+                    </ul>
+                </li>
+                <li><span><a href="#">Rap</a></span></li>
+                <li><span><a href="#">Classical</a></span></li>
+            </ul>
+        </li>
+        <li><span><a href="#">Games</a></span>
+            <ul>
+                <li><span><a href="#">Puzzle</a></span>
+                    <ul>
+                        <li><span><a href="#">Jigsaw</a></span></li>
+                        <li><span><a href="#">Match Three</a></span></li>
+                        <li><span><a href="#">Find the Differences</a></span></li>
+                    </ul>
+                </li>
+                <li><span><a href="#">Action</a></span>
+                    <ul>
+                        <li><span><a href="#">Fighting</a></span></li>
+                        <li><span><a href="#">Shooting</a></span></li>
+                    </ul>
+                </li>
+                <li><span><a href="#">Adventure</a></span></li>
+            </ul>
+        </li>
+
+        <li><span><a href="#">Sleeping</a></span></li>
+    </ul>
+</div>
+</body>
+</html>

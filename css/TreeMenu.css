@@ -1,0 +1,48 @@
+/*Simple style*/
+#TreeMenu {
+	font-family:"Comic Sans MS", cursive, sans-serif;
+	font-size: 1.2em;
+}
+#TreeMenu li {
+	display: block;
+	overflow: hidden;
+	
+	
+	/*Modify here*/
+	
+	
+	width: 250px;
+}
+#TreeMenu ul {
+	margin:0;
+	padding:0;
+	
+	
+}
+#TreeMenu ._tree_menu_collapsed{
+	background: url(../images/collapsed2.png) 5px center no-repeat;
+}
+#TreeMenu ._tree_menu_expanded {
+	background: url(../images/expanded2.png) 5px center no-repeat;
+}
+#TreeMenu span {
+	display: block;
+	margin:0;
+	padding: 0;
+	
+}
+#TreeMenu li span a {
+	display: block;
+	text-decoration: none;
+	padding-left: 15px;
+	
+}
+#TreeMenu li span.current a {
+	color: #1D499A;
+}
+#TreeMenu li span a:hover {
+	text-decoration: underline;
+}
+/*#TreeMenu li._tree_menu_item_level_0 > span > a { 
+	font-weight: bold;
+}*/

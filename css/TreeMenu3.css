@@ -1,0 +1,85 @@
+
+
+/*BOX*/
+
+
+#TreeMenu3 {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 1em;
+	font-weight: bold;
+}
+#TreeMenu3 li {
+	display: block;
+	overflow: hidden;
+	
+	/*Modify here*/
+	
+	width: 200px;
+	
+	
+}
+#TreeMenu3 ul {
+	margin:0;
+	padding:0;
+	
+	
+}
+#TreeMenu3 ._tree_menu_collapsed{
+	background: url(../images/collapsed.png) 5px center no-repeat;
+}
+#TreeMenu3 ._tree_menu_expanded {
+	background: url(../images/expanded.png) 5px center no-repeat;
+}
+#TreeMenu3 span {
+	display: block;
+	margin:0;
+	
+	border: 1px solid #bbbbbb;
+	background-color: #eeeeee;
+	
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	border-radius: 4px;
+	
+	
+	-moz-box-shadow: 0px 0px 3px  #888;
+	-webkit-box-shadow: 0px 0px 3px  #888;
+	
+	
+	box-shadow: 0px 0px 3px  #888;
+	
+	margin-bottom: 4px;
+	
+}
+#TreeMenu3 li span a {
+	display: block;
+	text-decoration: none;
+	padding-left: 20px;
+
+		
+	
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+#TreeMenu3 li span.hover {
+	background-color: #cccccc;
+}
+#TreeMenu3 li._tree_menu_item_level_1  span{ 
+	background-color: #dddddd;
+}
+#TreeMenu3 li._tree_menu_item_level_2  span{ 
+	background-color: #bbbbbb;
+}
+
+
+
+#TreeMenu3 li span.hover {
+	background-color: #cccccc;
+}
+#TreeMenu3 li span.current {
+	background-color: #888888;
+	
+}
+#TreeMenu3 li span a:hover {
+	
+}
