@@ -8,15 +8,20 @@
     <script type="text/javascript" src="../js/mootools-more-1.4.0.1.js"></script>
     <script type="text/javascript" src="../js/widget.js"></script>
     <script type="text/javascript" src="../js/calendar.js"></script>
+    <script type="text/javascript" src="../js/trigger_picker.js"></script>
     <script type="text/javascript" src="../js/date_picker.js"></script>
+    <script type="text/javascript" src="../js/view.js"></script>
     <script type="text/javascript" src="../js/dialog_box.js"></script>
     <script type="text/javascript">
 
         window.addEvent('domready', function() {
+            //var d = new WizUi.fields.TriggerPicker({applyTo: 'ddd'});
 
             //var w = new WizUi.fields.Calendar();
-            //var c = new WizUi.fields.DatePicker();
-            var d = new WizUi.DialogBox({title:'my window'}).render().show();
+            //var c = new WizUi.fields.DatePicker({applyTo: 'ddd'});
+            //new WizUi.fields.DatePicker({applyTo:'ddd'});
+            new WizUi.Widget().render().show();
+           // var d = new WizUi.DialogBox({title:'my window'}).render().show();
 
             //alert($(w).hide());
             //w.hide();
@@ -26,6 +31,7 @@
     </script>
 </head>
 <body>
+<input type="text" name="" id='ddd'>
 <input type="date">
 <div id="sss">sssf</div>
 <input type="date">

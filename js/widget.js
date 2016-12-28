@@ -22,8 +22,8 @@ WizUi.Widget = new Class({
     Implements:[Options, Events],
     options:{
         //className : '',
-        //width   : 0,
-        //height  : 0,
+        width   : 100,
+        height  : 100,
         //applyTo : '',
         //renderTo: '',
         //resizable : true,
