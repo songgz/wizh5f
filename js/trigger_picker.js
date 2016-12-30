@@ -27,7 +27,7 @@ WizUi.fields.TriggerPicker = new Class({
         }
         this.trigger = new Element('span',{
             'class' : this.options.triggerClass,
-            html: '<span class="combo-arrow">qq</span>'
+            //html: '<span class="combo-arrow">qq</span>'
         }).inject(this.el);
         this.trigger.addEvent('click',this.onTriggerClick.bind(this));
         if(!this.options.width){

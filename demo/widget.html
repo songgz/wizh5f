@@ -12,6 +12,8 @@
     <script type="text/javascript" src="../js/date_picker.js"></script>
     <script type="text/javascript" src="../js/view.js"></script>
     <script type="text/javascript" src="../js/dialog_box.js"></script>
+    <script type="text/javascript" src="../js/overlay.js"></script>
+    <script type="text/javascript" src="../js/light_box.js"></script>
     <script type="text/javascript">
 
         window.addEvent('domready', function() {
@@ -20,8 +22,9 @@
             //var w = new WizUi.fields.Calendar();
             //var c = new WizUi.fields.DatePicker({applyTo: 'ddd'});
             //new WizUi.fields.DatePicker({applyTo:'ddd'});
-            new WizUi.Widget().render().show();
-           // var d = new WizUi.DialogBox({title:'my window'}).render().show();
+            //new WizUi.Widget().render().show();
+            //var d = new WizUi.DialogBox({title:'my window'}).render().show();
+            new window.WizUi.LightBox().render().show();
 
             //alert($(w).hide());
             //w.hide();
